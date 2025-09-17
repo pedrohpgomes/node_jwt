@@ -1,12 +1,12 @@
 const path = require('path');
 const dotenv = require('dotenv');
 
-// Carrega o .env principal
-dotenv.config({ path: path.resolve(process.cwd(), '.env') });
+// Carrega o .env principal para saber o ambiente (production ou development)
+dotenv.config({ path: path.resolve(process.cwd(), './config/.env') });
+const currentEnv = process.env.APP_ENV ?? 'development';
 
 // Decide qual arquivo de ambiente carregar do arquivo .env (development ou production)
-const currentEnv = process.env.APP_ENV || 'development';
-dotenv.config({ path: path.resolve(process.cwd(), `.env.${currentEnv}`) });
+dotenv.config({ path: path.resolve(process.cwd(), `./config/.env.${currentEnv}`) });
 
 // Exporta as configs já resolvidas
 module.exports = {
